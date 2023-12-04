@@ -92,6 +92,7 @@ NV, _, H, W = images.shape
 if args.scale != 1.0:
     Ht = int(H * args.scale)
     Wt = int(W * args.scale)
+    print(f"Ht is {Ht},Wt is {Wt}")
     if abs(Ht / args.scale - H) > 1e-10 or abs(Wt / args.scale - W) > 1e-10:
         warnings.warn(
             "Inexact scaling, please check {} times ({}, {}) is integral".format(
