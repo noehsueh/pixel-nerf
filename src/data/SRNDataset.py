@@ -63,7 +63,11 @@ class SRNDataset(torch.utils.data.Dataset):
         dir_path = os.path.dirname(intrin_path)
         rgb_paths = sorted(glob.glob(os.path.join(dir_path, "rgb", "*")))
         pose_paths = sorted(glob.glob(os.path.join(dir_path, "pose", "*")))
-
+        print("paths")
+        print(rgb_paths)
+        print(pose_paths)
+        print(len(rgb_paths))
+        print(len(pose_paths))
         assert len(rgb_paths) == len(pose_paths)
 
         with open(intrin_path, "r") as intrinfile:
