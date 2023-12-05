@@ -191,6 +191,8 @@ focal = focal.to(device=device)
 source = torch.tensor(list(map(int, args.source.split())), dtype=torch.long)
 NS = len(source)
 random_source = NS == 1 and source[0] == -1
+
+print(f"number of sources {NS} , number of view {NV} source {source}")
 assert not (source >= NV).any()
 
 if renderer.n_coarse < 64:
