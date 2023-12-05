@@ -77,7 +77,7 @@ images = data["images"]  # (NV, 3, H, W)
 
 poses = data["poses"]  # (NV, 4, 4)
 focal = data["focal"]
-print(f"poses are {poses}, focals are {focal} args.subset {args.subset}")
+print(f"poses are {poses}, focals are {focal}  size of focal is {len(focal)}args.subset {args.subset}")
 
 if isinstance(focal, float):
     # Dataset implementations are not consistent about
