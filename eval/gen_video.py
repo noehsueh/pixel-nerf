@@ -77,6 +77,8 @@ images = data["images"]  # (NV, 3, H, W)
 
 poses = data["poses"]  # (NV, 4, 4)
 focal = data["focal"]
+print(f"poses are {poses}, focals are {focal} args.subset {args.subset}")
+
 if isinstance(focal, float):
     # Dataset implementations are not consistent about
     # returning float or scalar tensor in case of fx=fy
@@ -88,7 +90,7 @@ if c is not None:
     c = c.to(device=device).unsqueeze(0)
 
 NV, _, H, W = images.shape
-print(f"Ht is {H},Wt is {W}")
+print(f"Ht is {H},Wt is {W} Nv is {NV} new focal? {focal}")
 
 if args.scale != 1.0:
     Ht = int(H * args.scale)
