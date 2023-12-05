@@ -88,6 +88,7 @@ if c is not None:
     c = c.to(device=device).unsqueeze(0)
 
 NV, _, H, W = images.shape
+print(f"Ht is {H},Wt is {W}")
 
 if args.scale != 1.0:
     Ht = int(H * args.scale)
