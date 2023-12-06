@@ -206,11 +206,12 @@ if renderer.n_coarse < 64:
 
 with torch.no_grad():
     print("Encoding source view(s)")
+    print(f" is soruce random {random_source}")
     if random_source:
         src_view = torch.randint(0, NV, (1,))
     else:
         src_view = source
-
+    print(f"source view index is {src_view}")
     net.encode(
         images[src_view].unsqueeze(0),
         poses[src_view].unsqueeze(0).to(device=device),
