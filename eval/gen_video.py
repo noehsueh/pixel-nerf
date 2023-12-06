@@ -75,7 +75,7 @@ print(f"data {data}")
 print("Data instance loaded:", data_path)
 
 images = data["images"]  # (NV, 3, H, W)
-
+print(f"args are {args}")
 poses = data["poses"]  # (NV, 4, 4)
 focal = data["focal"]
 print(f"poses are {poses}, focals are {focal}  size of poses is {len(poses)}args.subset {args.subset}")
@@ -90,8 +90,9 @@ c = data.get("c")
 if c is not None:
     c = c.to(device=device).unsqueeze(0)
 
+print(f"c is {c}")
 NV, _, H, W = images.shape
-print(f"Ht is {H},Wt is {W} Nv is {NV} new focal? {focal}")
+print(f"Ht is {H},Wt is {W} Nv is {NV} ")
 
 if args.scale != 1.0:
     Ht = int(H * args.scale)
@@ -117,7 +118,7 @@ render_par = renderer.bind_parallel(net, args.gpu_id, simple_output=True).eval()
 # Get the distance from camera to origin
 z_near = dset.z_near
 z_far = dset.z_far
-
+print(f"dset is {dset}")
 print("Generating rays")
 
 dtu_format = hasattr(dset, "sub_format") and dset.sub_format == "dtu"
