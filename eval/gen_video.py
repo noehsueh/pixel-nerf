@@ -1,6 +1,8 @@
 import sys
 import os
 
+import matplotlib.pyplot as plt
+
 sys.path.insert(
     0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "src"))
 )
@@ -228,7 +230,8 @@ with torch.no_grad():
     # rgb_fine (V*H*W, 3)
 
     frames = rgb_fine.view(-1, H, W, 3)
-
+    print(f"image is {frames} ")
+    plt.imshow(frames)
 print("Writing video")
 vid_name = "{:04}".format(args.subset)
 if args.split == "test":
