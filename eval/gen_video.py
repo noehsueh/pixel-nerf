@@ -231,7 +231,7 @@ with torch.no_grad():
 
     frames = rgb_fine.view(-1, H, W, 3)
     print(f"image is {frames} ")
-    plt.imshow(frames)
+    plt.imshow(frames.detach().cpu().numpy())
 print("Writing video")
 vid_name = "{:04}".format(args.subset)
 if args.split == "test":
