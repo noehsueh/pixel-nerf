@@ -243,7 +243,47 @@ with torch.no_grad():
     plt.savefig(os.path.join(args.visual_path, args.name, "output_image.png"), bbox_inches='tight', pad_inches=0)  # Save without padding and border
 
 
+    #encoding target
+    net.encode(
+        image_numpy.unsqueeze(0),
+        render_poses.unsqueeze(0).to(device=device),
+        focal * args.scale,
+        c=c,
+    )
+    #generate rays
+    render_rays = util.gen_rays(
+        poses[src_view].unsqueeze(0),
+        W,
+        H,
+        focal,
+        z_near,
+        z_far,
+        c=c * args.scale if c is not None else None,
+    ).to(device=device)
 
+    #render ray
+    all_rgb_fine = []
+    for rays in tqdm.tqdm(
+        torch.split(render_rays.view(-1, 8), args.ray_batch_size, dim=0)
+    ):
+        rgb, _depth = render_par(rays[None])
+        all_rgb_fine.append(rgb[0])
+    _depth = None
+    rgb_fine = torch.cat(all_rgb_fine)
+    # rgb_fine (V*H*W, 3)
+
+frames = rgb_fine.view(-1, H, W, 3)
+print(f"there are  {len(frames)} amounts of frames  ")
+image_tensor = frames[0]
+# Convert to CPU and then to a NumPy array
+image_numpy = image_tensor.cpu().numpy()
+# If your data is in [0, 1], scale it to [0, 255]
+image_numpy = (image_numpy * 255).astype('uint8')
+# Display the image
+plt.imshow(image_numpy)
+plt.axis('off')  # Turn off axis numbers
+plt.savefig(os.path.join(args.visual_path, args.name, "output2_image.png"), bbox_inches='tight',
+            pad_inches=0)  # Save without padding and border
 
 print("Writing video")
 vid_name = "{:04}".format(args.subset)
