@@ -232,6 +232,19 @@ with torch.no_grad():
     frames = rgb_fine.view(-1, H, W, 3)
     print(f"image is {frames} ")
     plt.imshow(frames.detach().cpu().numpy())
+    image_tensor = frames[0]
+    # Convert to CPU and then to a NumPy array
+    image_numpy = image_tensor.cpu().numpy()
+    # If your data is in [0, 1], scale it to [0, 255]
+    image_numpy = (image_numpy * 255).astype('uint8')
+    # Display the image
+    plt.imshow(image_numpy)
+    plt.axis('off')  # Turn off axis numbers
+    plt.show()
+
+
+
+
 print("Writing video")
 vid_name = "{:04}".format(args.subset)
 if args.split == "test":
