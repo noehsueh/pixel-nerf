@@ -215,7 +215,7 @@ with torch.no_grad():
         focal,
         c=c,
     )
-
+    print(f"nuber of views befoer rendering {args.num_views} H {H} W {W}")
     print("Rendering", args.num_views * H * W, "rays")
     all_rgb_fine = []
     for rays in tqdm.tqdm(
