@@ -230,7 +230,7 @@ with torch.no_grad():
     # rgb_fine (V*H*W, 3)
 
     frames = rgb_fine.view(-1, H, W, 3)
-    print(f"image is {frames} ")
+    print(f"there are  {len(frames)} amounts of frames  ")
     image_tensor = frames[0]
     # Convert to CPU and then to a NumPy array
     image_numpy = image_tensor.cpu().numpy()
