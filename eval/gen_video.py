@@ -71,6 +71,7 @@ dset = get_split_dataset(
 
 data = dset[args.subset]
 data_path = data["path"]
+print(f"data {data}")
 print("Data instance loaded:", data_path)
 
 images = data["images"]  # (NV, 3, H, W)
