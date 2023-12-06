@@ -239,7 +239,7 @@ with torch.no_grad():
     # Display the image
     plt.imshow(image_numpy)
     plt.axis('off')  # Turn off axis numbers
-    plt.show()
+    plt.savefig(os.path.join(args.visual_path, args.name, "output_image.png"), bbox_inches='tight', pad_inches=0)  # Save without padding and border
 
 
 
